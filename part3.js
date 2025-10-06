@@ -1,17 +1,19 @@
-// Константи для параметрів
-const date = "20240801";          // серпень 2024
-const time_period = "month";      // період - місяць
+// part3.js
+const { URL, URLSearchParams } = require('url');
 
-// Базова адреса НБУ
-const baseUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/banks_income_expense";
+// Константи для варіанта 2 (Доходи та витрати банків)
+const date = "202408";       // серпень 2024 (формат YYYYMM)
+const time_period = "month"; // період - місяць
 
-// Створюємо об'єкт URL
-const url = new URL(baseUrl);
+// Базовий URL API НБУ для доходів та витрат банків
+const nbuUrl = new URL("https://bank.gov.ua/NBUStatService/v1/statdirectory/banksincexp");
 
-// Додаємо параметри через searchParams
-url.searchParams.append("date", date);
-url.searchParams.append("time_period", time_period);
-url.searchParams.append("json", "");
+// Додаємо параметри запиту через searchParams
+nbuUrl.search = new URLSearchParams({
+  json: "",          // формат JSON
+  date: date,
+  period: time_period
+});
 
 // Виводимо готовий URL у консоль
-console.log("Сконструйований URL:", url.toString());
+console.log("Сконструйований URL для частини 2:", nbuUrl.toString());
