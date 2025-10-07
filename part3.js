@@ -1,13 +1,20 @@
-const { URL, URLSearchParams } = require('url');
+const { URL, URLSearchParams } = require("url");
 
-const date = "20240801";
-const period = "month";
+const date = "202408";
+const time_period = "m";
 
-const nbuUrl = new URL("https://bank.gov.ua/NBUStatService/v1/statdirectory/banksincexp");
-nbuUrl.search = new URLSearchParams({
-  date: date,
-  period: period,
-  json: ""
-});
+const base = "https://bank.gov.ua/NBUStatService/v1/statdirectory/banksincomeexp";
 
-console.log(nbuUrl.toString());
+const url = new URL(base);
+
+const params = new URLSearchParams();
+params.set("date", date);
+params.set("period", time_period);
+params.set("json", "");
+
+const search = params.toString().replace(/json=$/, "json");
+
+url.search = search;
+
+console.log(url.toString());
+
